@@ -23,48 +23,12 @@ if pdf.empty:
     st.warning("The DataFrame is empty after loading!")
 else:
     st.success("Data loaded successfully!")
+    pdf['legal_ball'] = pdf.apply(lambda row: 1 if row['outcome'] in ['no run', 'out', 'four', 'run', 'six', 'leg bye', 'bye'] else 0, axis=1)
     st.write(f"DataFrame shape: {pdf.shape}")  # Display the shape of the DataFrame
-    st.write(pdf.head())  # Display the first few rows of the DataFrame
-
-# pdf = pd.read_csv(url)
+    st.write(pdf.tail())  # Display the first few rows of the DataFrame
 bpdf=pdf
-# @st.cache_data
-# def load_bowling_data():
-#     """Load bowling data from Google Drive"""
-#     try:
-#         file_id = '1-KPeLgLYKT2-EaxtN2EUtRR2Q1JSinqe'
-#         download_link = f'https://drive.google.com/uc?id={file_id}'
-#         output = 'bowling_data.csv'  # Use a unique output file name
-#         gdown.download(download_link, output, quiet=False)
-        
-#         df = pd.read_csv(output, low_memory=False)
-#         return df
-    
-#     except Exception as e:
-#         st.error(f"Error loading bowling data: {str(e)}")
-#         return None
-# bidf = load_bowling_data()
-# @st.cache_data
-# def load_batting_data():
-#     """Load batting data from Google Drive"""
-#     try:
-#         file_id = '1-Oxw0ZiXT40k1VC0PUgrn_JyAjCCra5D'
-#         download_link = f'https://drive.google.com/uc?id={file_id}'
-#         output = 'batting_data.csv'  # Use a unique output file name
-#         gdown.download(download_link, output, quiet=False)
-        
-#         df = pd.read_csv(output, low_memory=False)
-#         return df
-    
-#     except Exception as e:
-#         st.error(f"Error loading batting data: {str(e)}")
-#         return None
-
 idf = pd.read_csv("Datasets/lifesaver_bat_tests.csv",low_memory=False)
 bidf = pd.read_csv("Datasets/lifesaver_bowl_tests.csv",low_memory=False)
-# idf = load_batting_data()
-st.write(pdf.head())
-st.write(idf.head())
 sidebar_option = st.sidebar.radio(
     "Select an option:",
     ("Player Profile", "Matchup Analysis","Strength vs Weakness","Match by Match Analysis")
