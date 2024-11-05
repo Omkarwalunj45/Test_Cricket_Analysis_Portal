@@ -5,7 +5,7 @@ import math as mt
 import numpy as np
 import matplotlib.pyplot as plt
 import os
-
+from pymongo import MongoClient
 st.set_page_config(page_title='Test Cricket Performance Analysis Portal', layout='wide')
 st.title('Test Cricket Performance Analysis Portal')
 input_file = 'Datasets/tests_final.csv.xz'
@@ -52,7 +52,7 @@ if sidebar_option == "Player Profile":
             # Display Career Averages based on selection
             if option == "Batting":
                 # Create a temporary DataFrame and filter the player's row
-                temp_df = idf.drop(columns=['final_year','Unnamed:0'])
+                temp_df = idf.drop(columns=['final_year'])
                 player_stats = temp_df[temp_df['batsman'] == player_name]  # Filter for the selected player
     
                 # Convert column names to uppercase and replace underscores with spaces
