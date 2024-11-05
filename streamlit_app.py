@@ -1,7 +1,11 @@
 import streamlit as st
 import pandas as pd
 import gdown
-
+import math as mt
+import numpy as np
+import matplotlib.pyplot as plt
+st.set_page_config(page_title='Test Cricket Performance Analysis Portal', layout='wide')
+st.title('Test Cricket Performance Analysis Portal')
 @st.cache_data
 def load_data():
     """Load cricket data from Google Drive"""
@@ -26,3 +30,9 @@ def load_data():
 
 pdf=load_data()
 bpdf=pdf
+idf=pd.read_csv('lifesaver_bat.csv')
+bidf=pd.read_csv('lifesaver_bat.csv')
+pdf['legal_ball'] = pdf.apply(lambda row: 1 if row['outcome'] in ['no run', 'out', 'four', 'run', 'six', 'leg bye', 'bye'] else 0, axis=1)
+bpdf['legal_ball'] = bpdf.apply(lambda row: 1 if row['outcome'] in ['no run', 'out', 'four', 'run', 'six', 'leg bye', 'bye'] else 0, axis=1)
+
+
