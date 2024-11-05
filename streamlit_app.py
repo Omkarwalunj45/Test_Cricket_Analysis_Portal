@@ -52,7 +52,7 @@ if sidebar_option == "Player Profile":
             # Display Career Averages based on selection
             if option == "Batting":
                 # Create a temporary DataFrame and filter the player's row
-                temp_df = idf.drop(columns=['final_year'])
+                temp_df = idf.drop(columns=['final_year','Unnamed"0'])
                 player_stats = temp_df[temp_df['batsman'] == player_name]  # Filter for the selected player
     
                 # Convert column names to uppercase and replace underscores with spaces
@@ -67,6 +67,6 @@ if sidebar_option == "Player Profile":
                     
                    # Convert the specified columns to integer type
                 player_stats[columns_to_convert] = player_stats[columns_to_convert].astype(int)
-                player_stats=player_stats.drop(columns=['UNNAMED:0'])
+            
                 st.table(player_stats.style.set_table_attributes("style='font-weight: bold;'"))                
                 # Initializing an empty DataFrame for results and a counter
