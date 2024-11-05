@@ -18,8 +18,6 @@ st.title('Test Cricket Performance Analysis Portal')
 # pdf = pdf.drop(columns=['Unnamed: 0', 'Unnamed: 0.1'])
 # pdf['legal_ball'] = pdf.apply(lambda row: 1 if row['outcome'] in ['no run', 'out', 'four', 'run', 'six', 'leg bye', 'bye'] else 0, axis=1)
 # # st.write(pdf.tail())
-import pandas as pd
-import streamlit as st
 
 def load_data(input_file):
     """
@@ -48,6 +46,7 @@ bpdf=pdf
 idf = pd.read_csv("Datasets/lifesaver_bat_tests.csv",low_memory=False)
 idf = idf.drop(columns=['Unnamed: 0'])
 bidf = pd.read_csv("Datasets/lifesaver_bowl_tests.csv",low_memory=False)
+st.switch_page("pages/Career Statistics.py")
 # sidebar_option = st.sidebar.radio(
 #     "Select an option:",
 #     ("Player Profile", "Matchup Analysis","Strength vs Weakness","Match by Match Analysis")
