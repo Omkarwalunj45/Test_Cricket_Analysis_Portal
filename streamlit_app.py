@@ -28,8 +28,9 @@ def load_data():
 pdf = load_data()
 bpdf=pdf
 # Ensure pdf is loaded successfully before modifying it
-if pdf is not None:
-    pdf['legal_ball'] = pdf.apply(lambda row: 1 if row['outcome'] in ['no run', 'out', 'four', 'run', 'six', 'leg bye', 'bye'] else 0, axis=1)
+# if pdf is not None:
+#     pdf['legal_ball'] = pdf.apply(lambda row: 1 if row['outcome'] in ['no run', 'out', 'four', 'run', 'six', 'leg bye', 'bye'] else 0, axis=1)
+
 
 @st.cache_data
 def load_bowling_data():
