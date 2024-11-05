@@ -71,3 +71,4 @@ if sidebar_option == "Player Profile":
             
                 st.table(player_stats.style.set_table_attributes("style='font-weight: bold;'"))                
                 # Initializing an empty DataFrame for results and a counter
+                # st.switch_page("pages/Career Statistics Batting.py")
