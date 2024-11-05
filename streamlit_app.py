@@ -41,17 +41,6 @@ if sidebar_option == "Player Profile":
 
     # Filter the data for the selected player
     player_info = idf[idf['batsman'] == player_name].iloc[0]
-
-    # Check if the player exists in info_df
-    matching_rows = info_df[info_df['batsman'] == player_name]
-
-    if not matching_rows.empty:
-        # If there is a matching row, access the first one
-        p_info = matching_rows.iloc[0]
-    else:
-        # st.write(f"No player found with the name '{player_name}'")
-        p_info = None  # Set a fallback
-
     # Tabs for "Overview", "Career Statistics", and "Current Form"
     tab1, tab2 = st.tabs(["Career Statistics", "Current Form"])
     with tab2:
@@ -66,7 +55,7 @@ if sidebar_option == "Player Profile":
             # Display Career Averages based on selection
             if option == "Batting":
                 # Create a temporary DataFrame and filter the player's row
-                temp_df = idf.drop(columns=['final_year','matches'])
+                temp_df = idf.drop(columns=['final_year'])
                 player_stats = temp_df[temp_df['batsman'] == player_name]  # Filter for the selected player
     
                 # Convert column names to uppercase and replace underscores with spaces
