@@ -46,7 +46,7 @@ bpdf=pdf
 idf = pd.read_csv("Datasets/lifesaver_bat_tests.csv",low_memory=False)
 idf = idf.drop(columns=['Unnamed: 0'])
 bidf = pd.read_csv("Datasets/lifesaver_bowl_tests.csv",low_memory=False)
-st.switch_page("pages/Career Statistics.py")
+st.switch_page("pages/Career Statistics")
 sidebar_option = st.sidebar.radio(
     "Select an option:",
     ("Player Profile", "Matchup Analysis","Strength vs Weakness","Match by Match Analysis")
