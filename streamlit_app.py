@@ -59,3 +59,7 @@ def load_batting_data():
         return None
 
 idf = load_batting_data()
+sidebar_option = st.sidebar.radio(
+    "Select an option:",
+    ("Player Profile", "Matchup Analysis","Strength vs Weakness","Match by Match Analysis")
+)
