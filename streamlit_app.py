@@ -7,25 +7,62 @@ import matplotlib.pyplot as plt
 st.set_page_config(page_title='Test Cricket Performance Analysis Portal', layout='wide')
 st.title('Test Cricket Performance Analysis Portal')
 # url = 'https://drive.google.com/uc?id=1ljpdtij42aAkFEVsyTP6frkbt-A1oxgZ'  # Replace with your modified link
-import gdown
+# import gdown
 
 # Google Drive file ID
-file_id = '1ljpdtij42aAkFEVsyTP6frkbt-A1oxgZ'
+# file_id = '1t1tCC_glkNEQDd55zx6wFOR_V0n9cHab'
+# download_link = f'https://drive.google.com/uc?id={file_id}'
+# output = 'cricket_data.csv'
+
+# gdown.download(download_link, output, quiet=False)
+
+# # Now read the downloaded CSV
+# pdf = pd.read_csv(output)
+import zipfile
+import requests
+import io
+
+# Function to download and extract CSV from a zip file
+def load_csv_from_zip(zip_url, csv_filename):
+    # Download the zip file
+    response = requests.get(zip_url)
+    response.raise_for_status()  # Raise an error if the download fails
+    
+    # Open the zip file from the downloaded content
+    with zipfile.ZipFile(io.BytesIO(response.content)) as z:
+        # Check if the specified CSV file exists in the zip
+        if csv_filename in z.namelist():
+            with z.open(csv_filename) as f:
+                # Load the CSV file into a DataFrame
+                df = pd.read_csv(f)
+                return df
+        else:
+            st.error(f"{csv_filename} not found in the zip file.")
+            return None
+
+# Google Drive file ID and download link
+file_id = '1t1tCC_glkNEQDd55zx6wFOR_V0n9cHab'
 download_link = f'https://drive.google.com/uc?id={file_id}'
-output = 'cricket_data.csv'
 
-gdown.download(download_link, output, quiet=False)
+# Specify the name of the CSV file inside the zip
+csv_filename = 'tests_final.csv'
 
-# Now read the downloaded CSV
-pdf = pd.read_csv(output)
+# Load the CSV file into a DataFrame
+df = load_csv_from_zip(download_link, csv_filename)
 
-if pdf.empty:
-    st.warning("The DataFrame is empty after loading!")
-else:
-    # st.success("Data loaded successfully!")
-    pdf['legal_ball'] = pdf.apply(lambda row: 1 if row['outcome'] in ['no run', 'out', 'four', 'run', 'six', 'leg bye', 'bye'] else 0, axis=1)
-    # st.write(f"DataFrame shape: {pdf.shape}")  # Display the shape of the DataFrame
-    # st.write(pdf.tail())  # Display the first few rows of the DataFrame
+# Display the DataFrame in Streamlit
+if df is not None:
+    st.write(df.head())  # Show the first few rows of the DataFrame
+
+
+# if pdf.empty:
+#     st.warning("The DataFrame is empty after loading!")
+# else:
+#     # st.success("Data loaded successfully!")
+#     pdf['legal_ball'] = pdf.apply(lambda row: 1 if row['outcome'] in ['no run', 'out', 'four', 'run', 'six', 'leg bye', 'bye'] else 0, axis=1)
+#     # st.write(f"DataFrame shape: {pdf.shape}")  # Display the shape of the DataFrame
+#     # st.write(pdf.tail())  # Display the first few rows of the DataFrame
+df=pdf
 bpdf=pdf
 idf = pd.read_csv("Datasets/lifesaver_bat_tests.csv",low_memory=False)
 bidf = pd.read_csv("Datasets/lifesaver_bowl_tests.csv",low_memory=False)
