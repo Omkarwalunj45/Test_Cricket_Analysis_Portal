@@ -19,12 +19,12 @@ gdown.download(download_link, output, quiet=False)
 # Now read the downloaded CSV
 pdf = pd.read_csv(output)
 
-if df.empty:
+if pdf.empty:
     st.warning("The DataFrame is empty after loading!")
 else:
     st.success("Data loaded successfully!")
-    st.write(f"DataFrame shape: {df.shape}")  # Display the shape of the DataFrame
-    st.write(df.head())  # Display the first few rows of the DataFrame
+    st.write(f"DataFrame shape: {pdf.shape}")  # Display the shape of the DataFrame
+    st.write(pdf.head())  # Display the first few rows of the DataFrame
 
 # pdf = pd.read_csv(url)
 bpdf=pdf
