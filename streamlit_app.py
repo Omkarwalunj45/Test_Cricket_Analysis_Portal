@@ -5,16 +5,19 @@ import math as mt
 import numpy as np
 import matplotlib.pyplot as plt
 import os
-from pymongo import MongoClient
 st.set_page_config(page_title='Test Cricket Performance Analysis Portal', layout='wide')
 st.title('Test Cricket Performance Analysis Portal')
 input_file = 'Datasets/tests_final.csv.xz'
 
-# Path to save the uncompressed CSV file
-output_file = 'Datasets/tests_final_uncompressed.csv'
+# Create a function to load and return the DataFrame
+@st.cache_data
+def load_data():
+    # Load the compressed file
+    df = pd.read_csv(input_file, compression='xz', low_memory=False)
+    return df
 
-# Load the compressed file
-df = pd.read_csv(input_file, compression='xz', low_memory=False)
+# Load the data using the caching function
+df = load_data()
 
 pdf=df
 pdf = pdf.drop(columns=['Unnamed: 0', 'Unnamed: 0.1'])
