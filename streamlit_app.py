@@ -4,7 +4,6 @@ import gdown
 import math as mt
 import numpy as np
 import matplotlib.pyplot as plt
-
 st.set_page_config(page_title='Test Cricket Performance Analysis Portal', layout='wide')
 st.title('Test Cricket Performance Analysis Portal')
 
@@ -27,11 +26,6 @@ def load_data():
 
 pdf = load_data()
 bpdf=pdf
-# Ensure pdf is loaded successfully before modifying it
-# if pdf is not None:
-#     pdf['legal_ball'] = pdf.apply(lambda row: 1 if row['outcome'] in ['no run', 'out', 'four', 'run', 'six', 'leg bye', 'bye'] else 0, axis=1)
-
-
 @st.cache_data
 def load_bowling_data():
     """Load bowling data from Google Drive"""
