@@ -46,4 +46,4 @@ bpdf=pdf
 idf = pd.read_csv("Datasets/lifesaver_bat_tests.csv",low_memory=False)
 idf = idf.drop(columns=['Unnamed: 0'])
 bidf = pd.read_csv("Datasets/lifesaver_bowl_tests.csv",low_memory=False)
-st.switch_page("pages/Career Statistics")
+st.switch_page("pages/Career Statistics.py")
