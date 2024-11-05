@@ -108,7 +108,7 @@ print("Hi")
 def load_bowling_data():
     """Load bowling data from Google Drive"""
     try:
-        file_id = '1-En14nPHfxJoOKJJRv4dC1rX_9q_1QjY'
+        file_id = '1-KPeLgLYKT2-EaxtN2EUtRR2Q1JSinqe'
         download_link = f'https://drive.google.com/uc?id={file_id}'
         output = 'bowling_data.csv'  # Use a unique output file name
         gdown.download(download_link, output, quiet=False)
@@ -126,7 +126,7 @@ print(1)
 def load_batting_data():
     """Load batting data from Google Drive"""
     try:
-        file_id = '1-9AGcGSaesnRhB-zySb1-_VdBfiElGCa'
+        file_id = '1-Oxw0ZiXT40k1VC0PUgrn_JyAjCCra5D'
         download_link = f'https://drive.google.com/uc?id={file_id}'
         output = 'batting_data.csv'  # Use a unique output file name
         gdown.download(download_link, output, quiet=False)
