@@ -44,6 +44,7 @@ bpdf=pdf
 idf = pd.read_csv("Datasets/lifesaver_bat_tests.csv",low_memory=False)
 bidf = pd.read_csv("Datasets/lifesaver_bowl_tests.csv",low_memory=False)
 # idf = load_batting_data()
+st.write(pdf.head())
 sidebar_option = st.sidebar.radio(
     "Select an option:",
     ("Player Profile", "Matchup Analysis","Strength vs Weakness","Match by Match Analysis")
