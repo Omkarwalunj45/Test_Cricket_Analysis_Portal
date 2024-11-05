@@ -18,7 +18,7 @@ df = pd.read_csv(input_file, compression='xz', low_memory=False)
 
 pdf=df
 pdf = pdf.drop(columns=['Unnamed: 0', 'Unnamed: 0.1'])
-
+pdf['legal_ball'] = pdf.apply(lambda row: 1 if row['outcome'] in ['no run', 'out', 'four', 'run', 'six', 'leg bye', 'bye'] else 0, axis=1)
 st.write(pdf.tail())
 
 
