@@ -1,6 +1,4 @@
 streamlit>=1.26.0
-gdown
 pandas
 numpy
 matplotlib
-pymongo
