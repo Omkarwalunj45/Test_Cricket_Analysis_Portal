@@ -19,7 +19,7 @@ df = pd.read_csv(input_file, compression='xz', low_memory=False)
 pdf=df
 pdf = pdf.drop(columns=['Unnamed: 0', 'Unnamed: 0.1'])
 pdf['legal_ball'] = pdf.apply(lambda row: 1 if row['outcome'] in ['no run', 'out', 'four', 'run', 'six', 'leg bye', 'bye'] else 0, axis=1)
-st.write(pdf.tail())
+# st.write(pdf.tail())
 
 
 # pdf=merged_df
@@ -40,7 +40,7 @@ if sidebar_option == "Player Profile":
     player_info = idf[idf['batsman'] == player_name].iloc[0]
     # Tabs for "Overview", "Career Statistics", and "Current Form"
     tab1, tab2 = st.tabs(["Career Statistics", "Current Form"])
-    with tab2:
+    with tab1:
             st.header("Career Statistics")
     
             # Dropdown for Batting or Bowling selection
