@@ -119,6 +119,8 @@ def load_bowling_data():
     except Exception as e:
         st.error(f"Error loading bowling data: {str(e)}")
         return None
+bidf = load_bowling_data()
+print(1)
 
 @st.cache_data
 def load_batting_data():
@@ -137,6 +139,6 @@ def load_batting_data():
         return None
 
 idf = load_batting_data()
-bidf = load_bowling_data()
+
 
 print("2")
