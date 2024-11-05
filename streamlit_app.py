@@ -25,7 +25,7 @@ def load_data():
         return None
 
 
-url = 'https://drive.google.com/file/d/1ljpdtij42aAkFEVsyTP6frkbt-A1oxgZ/view?usp=drive_link'  # Replace with your modified link
+url = 'https://drive.google.com/uc?id=1ljpdtij42aAkFEVsyTP6frkbt-A1oxgZ'  # Replace with your modified link
 pdf = pd.read_csv(url)
 
 bpdf=pdf
