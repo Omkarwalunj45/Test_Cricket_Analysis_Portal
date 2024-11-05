@@ -28,11 +28,11 @@ def load_data():
         st.error(f"Error loading data: {str(e)}")
         return None
 
-# pdf=load_data()
+pdf=load_data()
 # bpdf=pdf
 idf=pd.read_csv('Datasets/lifesaver_bat_tests.csv')
 bidf=pd.read_csv('Datasets/lifesaver_bat_tests.csv')
-# pdf['legal_ball'] = pdf.apply(lambda row: 1 if row['outcome'] in ['no run', 'out', 'four', 'run', 'six', 'leg bye', 'bye'] else 0, axis=1)
+pdf['legal_ball'] = pdf.apply(lambda row: 1 if row['outcome'] in ['no run', 'out', 'four', 'run', 'six', 'leg bye', 'bye'] else 0, axis=1)
 # bpdf['legal_ball'] = bpdf.apply(lambda row: 1 if row['outcome'] in ['no run', 'out', 'four', 'run', 'six', 'leg bye', 'bye'] else 0, axis=1)
 
 
