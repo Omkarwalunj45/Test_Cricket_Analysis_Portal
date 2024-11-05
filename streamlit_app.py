@@ -1,10 +1,8 @@
 import streamlit as st
 import pandas as pd
-import gdown
 import math as mt
 import numpy as np
 import matplotlib.pyplot as plt
-import os
 st.set_page_config(page_title='Test Cricket Performance Analysis Portal', layout='wide')
 st.title('Test Cricket Performance Analysis Portal')
 input_file = 'Datasets/tests_final.csv.xz'
