@@ -10,15 +10,10 @@ st.title('Test Cricket Performance Analysis Portal')
 input_file = 'Datasets/tests_final.csv.xz'
 
 # Create a function to load and return the DataFrame
-@st.cache_data
-def load_data():
-    # Load the compressed file
-    df = pd.read_csv(input_file, compression='xz', low_memory=False)
-    return df
+# Load the compressed file with caching
+df = st.cache_data(lambda: pd.read_csv(input_file, compression='xz', low_memory=False))()
 
-# Load the data using the caching function
-df = load_data()
-
+# Now you can use df in your Streamlit app
 pdf=df
 pdf = pdf.drop(columns=['Unnamed: 0', 'Unnamed: 0.1'])
 pdf['legal_ball'] = pdf.apply(lambda row: 1 if row['outcome'] in ['no run', 'out', 'four', 'run', 'six', 'leg bye', 'bye'] else 0, axis=1)
