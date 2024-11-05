@@ -60,7 +60,7 @@ if sidebar_option == "Player Profile":
     
                 # Convert column names to uppercase and replace underscores with spaces
                 player_stats.columns = [col.upper().replace('_', ' ') for col in player_stats.columns]
-                player_stats=round_up_floats(player_stats)
+                # player_stats=round_up_floats(player_stats)
                 # Display the player's statistics in a table format with bold headers
                 st.markdown("### Batting Statistics")
                 columns_to_convert = ['RUNS','HUNDREDS', 'FIFTIES','THIRTIES', 'HIGHEST SCORE']
