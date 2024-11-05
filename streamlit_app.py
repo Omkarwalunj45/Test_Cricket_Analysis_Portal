@@ -9,7 +9,9 @@ input_file = 'Datasets/tests_final.csv.xz'
 
 # Create a function to load and return the DataFrame
 # Load the compressed file with caching
-df = st.cache_data(lambda: pd.read_csv(input_file, compression='xz', low_memory=False))()
+# df = st.cache_data(lambda: pd.read_csv(input_file, compression='xz', low_memory=False))()
+df = st.cache_data(pd.read_csv)(input_file, compression='xz', low_memory=False)
+
 
 # Now you can use df in your Streamlit app
 pdf=df
