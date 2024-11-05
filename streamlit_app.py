@@ -96,6 +96,7 @@ output_file = 'Datasets/tests_final_uncompressed.csv'
 df = pd.read_csv(input_file, compression='xz', low_memory=False)
 
 pdf=df
+pdf=pdf.drop(columns={'Unnamed:0','Unnamed:0.1'})
 st.write(pdf.tail())
 
 
