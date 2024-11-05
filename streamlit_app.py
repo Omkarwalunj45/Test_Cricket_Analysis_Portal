@@ -97,10 +97,12 @@ def load_data():
         return None
 
 pdf = load_data()
+bpdf=pdf
+print("Hi")
 
 # Ensure pdf is loaded successfully before modifying it
-if pdf is not None:
-    pdf['legal_ball'] = pdf.apply(lambda row: 1 if row['outcome'] in ['no run', 'out', 'four', 'run', 'six', 'leg bye', 'bye'] else 0, axis=1)
+# if pdf is not None:
+#     pdf['legal_ball'] = pdf.apply(lambda row: 1 if row['outcome'] in ['no run', 'out', 'four', 'run', 'six', 'leg bye', 'bye'] else 0, axis=1)
 
 @st.cache_data
 def load_bowling_data():
@@ -137,15 +139,4 @@ def load_batting_data():
 idf = load_batting_data()
 bidf = load_bowling_data()
 
-if pdf is not None:
-    st.write("Loaded main cricket data:")
-    st.write(pdf.head())
-
-if idf is not None:
-    st.write("Loaded batting data:")
-    st.write(idf.head())
-
-if bidf is not None:
-    st.write("Loaded bowling data:")
-    st.write(bidf.head())
-
+print("2")
