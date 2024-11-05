@@ -41,8 +41,8 @@ bpdf=pdf
 #         st.error(f"Error loading batting data: {str(e)}")
 #         return None
 
-idf = pd.read_csv("Dataset/lifesaver_bat_tests.csv",low_memory=False)
-bidf = pd.read_csv("Dataset/lifesaver_bowl_tests.csv",low_memory=False)
+idf = pd.read_csv("Datasets/lifesaver_bat_tests.csv",low_memory=False)
+bidf = pd.read_csv("Datasets/lifesaver_bowl_tests.csv",low_memory=False)
 # idf = load_batting_data()
 sidebar_option = st.sidebar.radio(
     "Select an option:",
