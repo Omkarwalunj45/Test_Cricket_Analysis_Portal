@@ -24,7 +24,10 @@ def load_data():
         st.error(f"Error loading data: {str(e)}")
         return None
 
-pdf = load_data()
+
+url = 'https://drive.google.com/file/d/1ljpdtij42aAkFEVsyTP6frkbt-A1oxgZ/view?usp=drive_link'  # Replace with your modified link
+pdf = pd.read_csv(url)
+
 bpdf=pdf
 @st.cache_data
 def load_bowling_data():
