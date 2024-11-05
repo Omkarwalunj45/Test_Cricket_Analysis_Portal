@@ -67,29 +67,39 @@ st.title('Test Cricket Performance Analysis Portal')
 # df=pdf
 
 
-datasets_folder = 'Datasets'  # Folder name within your Streamlit template
+# datasets_folder = 'Datasets'  # Folder name within your Streamlit template
 
-# Initialize an empty list to hold DataFrames
-dataframes = []
+# # Initialize an empty list to hold DataFrames
+# dataframes = []
 
-# Loop through the CSV files to read and append to the list
-for i in range(1, 17):  # from 1 to 16
-    file_name = f'split_file_{i}.csv'
-    file_path = os.path.join(datasets_folder, file_name)
+# # Loop through the CSV files to read and append to the list
+# for i in range(1, 17):  # from 1 to 16
+#     file_name = f'split_file_{i}.csv'
+#     file_path = os.path.join(datasets_folder, file_name)
     
-    if os.path.exists(file_path):  # Check if the file exists
-        df = pd.read_csv(file_path, low_memory=False)  # Read CSV with low_memory=False
-        dataframes.append(df)
-    else:
-        st.warning(f"{file_name} does not exist.")
+#     if os.path.exists(file_path):  # Check if the file exists
+#         df = pd.read_csv(file_path, low_memory=False)  # Read CSV with low_memory=False
+#         dataframes.append(df)
+#     else:
+#         st.warning(f"{file_name} does not exist.")
 
-# Merge all DataFrames into a single DataFrame
-if dataframes:
-    merged_df = pd.concat(dataframes, ignore_index=True)
+# # Merge all DataFrames into a single DataFrame
+# if dataframes:
+#     merged_df = pd.concat(dataframes, ignore_index=True
+# Path to your compressed file
+input_file = 'Datasets/tests_final.csv.xz'
+
+# Path to save the uncompressed CSV file
+output_file = 'Datasets/tests_final_uncompressed.csv'
+
+# Load the compressed file
+df = pd.read_csv(input_file, compression='xz', low_memory=False)
+
+pdf=df
+st.write(pdf.tail())
 
 
-
-pdf=merged_df
+# pdf=merged_df
 bpdf=pdf
 idf = pd.read_csv("Datasets/lifesaver_bat_tests.csv",low_memory=False)
 bidf = pd.read_csv("Datasets/lifesaver_bowl_tests.csv",low_memory=False)
