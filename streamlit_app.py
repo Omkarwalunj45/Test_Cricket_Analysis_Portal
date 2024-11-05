@@ -47,10 +47,10 @@ idf = pd.read_csv("Datasets/lifesaver_bat_tests.csv",low_memory=False)
 idf = idf.drop(columns=['Unnamed: 0'])
 bidf = pd.read_csv("Datasets/lifesaver_bowl_tests.csv",low_memory=False)
 st.switch_page("pages/Career Statistics.py")
-# sidebar_option = st.sidebar.radio(
-#     "Select an option:",
-#     ("Player Profile", "Matchup Analysis","Strength vs Weakness","Match by Match Analysis")
-# )
+sidebar_option = st.sidebar.radio(
+    "Select an option:",
+    ("Player Profile", "Matchup Analysis","Strength vs Weakness","Match by Match Analysis")
+)
 # if sidebar_option == "Player Profile":
 #     st.header("Player Profile")
 
@@ -90,5 +90,4 @@ st.switch_page("pages/Career Statistics.py")
 #                 player_stats[columns_to_convert] = player_stats[columns_to_convert].astype(int)
             
 #                 st.table(player_stats.style.set_table_attributes("style='font-weight: bold;'"))                
-#                 # Initializing an empty DataFrame for results and a counter
-#                 # st.switch_page("pages/Career Statistics Batting.py")
+               
