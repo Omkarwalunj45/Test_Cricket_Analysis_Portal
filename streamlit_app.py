@@ -307,7 +307,7 @@ def load_data():
 pdf = load_data()
 pdf=pdf.rename(columns={'innings':'inning'})
 bpdf = pdf
-pdf['is_wicket'] = pdf['out'].astype(int) 
+# pdf['is_wicket'] = pdf['out'].astype(int) 
 idf = cumulator(pdf)
 bidf = load_csv("Datasets/lifesaver_bowl_tests.csv")
 bidf=bidf.drop(columns=['Unnamed: 0','overs'])
