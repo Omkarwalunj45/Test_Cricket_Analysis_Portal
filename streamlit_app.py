@@ -295,11 +295,9 @@ def bowlerstat(df):
 def load_csv(file_path):
     return pd.read_csv(file_path, low_memory=False)
 
-# Load the data using the caching function
-uploaded_file = st.file_uploader("Choose a CSV file", type='csv')
+file_url = 'https://drive.google.com/uc?export=download&id=1MRbB_v2M5qfLs3Y2KsNObdOrcyMSY4UI'
 
-if uploaded_file is not None:
-    pdf = pd.read_csv(uploaded_file)
+pdf = pd.read_csv(url)
 pdf=pdf.rename(columns={'innings':'inning'})
 bpdf = pdf
 pdf['is_wicket'] = pdf['out'].astype(int) 
