@@ -291,24 +291,20 @@ def bowlerstat(df):
 
 
     return bowl_rec
-
-
-# pdf = pd.read_csv("tests_final.csv",low_memory=False)
-# bpdf=pdf
-# idf = pd.read_csv("lifesaver_bat_tests.csv",low_memory=False)
-# idf = idf.drop(columns=['Unnamed: 0'])
-# bidf = pd.read_csv("lifesaver_bowl_tests.csv",low_memory=False)
 @st.cache_data
 def load_csv(file_path):
     return pd.read_csv(file_path, low_memory=False)
 
 # Load the data using the caching function
-pdf = load_csv("tests_final.csv")
+uploaded_file = st.file_uploader("Choose a CSV file", type='csv')
+
+if uploaded_file is not None:
+    pdf = pd.read_csv(uploaded_file)
 pdf=pdf.rename(columns={'innings':'inning'})
 bpdf = pdf
 pdf['is_wicket'] = pdf['out'].astype(int) 
 idf = cumulator(pdf)
-bidf = load_csv("lifesaver_bowl_tests.csv")
+bidf = load_csv("Datasets/lifesaver_bowl_tests.csv")
 bidf=bidf.drop(columns=['Unnamed: 0','overs'])
 bidf['overs'] = bidf['balls'].apply(lambda x: f"{mt.floor(x / 6) + round(0.1 * (x % 6), 1):.1f}".rstrip('0').rstrip('.'))
 
