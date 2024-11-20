@@ -294,10 +294,17 @@ def bowlerstat(df):
 @st.cache_data
 def load_csv(file_path):
     return pd.read_csv(file_path, low_memory=False)
+ 
+@st.cache_data
+def load_data():
+    # Get the shareable link and replace 'file/d/' with 'uc?export=download&id='
+    FILE_ID = '1MRbB_v2M5qfLs3Y2KsNObdOrcyMSY4UI'
+    DOWNLOAD_URL = f'https://drive.google.com/uc?export=download&id={FILE_ID}'
+    
+    return pd.read_csv(DOWNLOAD_URL)
 
-url = 'https://drive.google.com/uc?export=download&id=1MRbB_v2M5qfLs3Y2KsNObdOrcyMSY4UI'
-
-pdf = pd.read_csv(url)
+# Use in your app
+pdf = load_data()
 pdf=pdf.rename(columns={'innings':'inning'})
 bpdf = pdf
 pdf['is_wicket'] = pdf['out'].astype(int) 
