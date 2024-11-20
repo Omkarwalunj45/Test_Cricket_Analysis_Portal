@@ -295,7 +295,7 @@ def bowlerstat(df):
 def load_csv(file_path):
     return pd.read_csv(file_path, low_memory=False)
 
-file_url = 'https://drive.google.com/uc?export=download&id=1MRbB_v2M5qfLs3Y2KsNObdOrcyMSY4UI'
+url = 'https://drive.google.com/uc?export=download&id=1MRbB_v2M5qfLs3Y2KsNObdOrcyMSY4UI'
 
 pdf = pd.read_csv(url)
 pdf=pdf.rename(columns={'innings':'inning'})
