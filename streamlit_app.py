@@ -298,7 +298,7 @@ def load_csv(file_path):
 @st.cache_data
 def load_data():
     # Get the shareable link and replace 'file/d/' with 'uc?export=download&id='
-    FILE_ID = '1MRbB_v2M5qfLs3Y2KsNObdOrcyMSY4UI'
+    FILE_ID = '1zLJ1aqolJQ6QUO4OMcZ1eHAw8ME1FfQ6'
     DOWNLOAD_URL = f'https://drive.google.com/uc?export=download&id={FILE_ID}'
     
     return pd.read_csv(DOWNLOAD_URL)
@@ -307,7 +307,7 @@ def load_data():
 pdf = load_data()
 pdf=pdf.rename(columns={'innings':'inning'})
 bpdf = pdf
-# pdf['is_wicket'] = pdf['out'].astype(int) 
+pdf['is_wicket'] = pdf['out'].astype(int) 
 idf = cumulator(pdf)
 bidf = load_csv("Datasets/lifesaver_bowl_tests.csv")
 bidf=bidf.drop(columns=['Unnamed: 0','overs'])
