@@ -306,6 +306,7 @@ def load_data():
 # Use in your app
 pdf = load_data()
 pdf=pdf.rename(columns={'innings':'inning'})
+st.write(pdf.head())
 bpdf = pdf
 pdf['is_wicket'] = pdf['out'].astype(int) 
 idf = cumulator(pdf)
