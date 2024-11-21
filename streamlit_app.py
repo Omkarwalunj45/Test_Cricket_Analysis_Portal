@@ -296,13 +296,14 @@ def load_csv(file_path):
     return pd.read_csv(file_path, low_memory=False)
  
 @st.cache_data
-def load_data():
-    # Get the shareable link and replace 'file/d/' with 'uc?export=download&id='
-    FILE_ID = '1zLJ1aqolJQ6QUO4OMcZ1eHAw8ME1FfQ6'
-    DOWNLOAD_URL = f'https://drive.google.com/uc?export=download&id={FILE_ID}'
+def load_data():   
+    # The raw GitHub URL to your CSV file
+    csv_url = "https://media.githubusercontent.com/media/Omkarwalunj45/Test_cricket_portal/refs/heads/main/tests_final.csv"
     
-    return pd.read_csv(DOWNLOAD_URL)
-
+    # Load the CSV file into pandas
+    df = pd.read_csv(csv_url)
+    return df
+ 
 # Use in your app
 pdf = load_data()
 pdf=pdf.rename(columns={'innings':'inning'})
