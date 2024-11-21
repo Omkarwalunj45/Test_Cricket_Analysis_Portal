@@ -295,25 +295,15 @@ def bowlerstat(df):
 
 @st.cache_data
 def load_data():
-    try:
-        # Direct pandas URL loading
-        df = pd.read_csv(
-            "https://media.githubusercontent.com/media/Omkarwalunj45/Test_cricket_portal/refs/heads/main/tests_final.csv", 
-            low_memory=False
-        )
-        
-        # Preprocessing in a single chain
-        df = (df
-              .rename(columns={'innings': 'inning'})
-              .assign(is_wicket=lambda x: x['out'].astype(int))
-             )
-        
-        return df
+    df = pd.read_csv(
+        "https://media.githubusercontent.com/media/Omkarwalunj45/Test_cricket_portal/refs/heads/main/tests_final.csv", 
+        low_memory=False
+    )
     
-    except Exception as e:
-        st.error(f"Error loading data: {e}")
-        return pd.DataFrame()
-
+    df = df.rename(columns={'innings': 'inning'})
+    df['is_wicket'] = df['out'].astype(int)
+    
+    return df
 @st.cache_data
 def load_bowling_data():
     try:
