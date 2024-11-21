@@ -291,23 +291,52 @@ def bowlerstat(df):
 
 
     return bowl_rec
-@st.cache_data
-def load_csv(file_path):
-    return pd.read_csv(file_path, low_memory=False)
- 
-@st.cache_data
-def load_data():   
-    # The raw GitHub URL to your CSV file
-    csv_url = "https://media.githubusercontent.com/media/Omkarwalunj45/Test_cricket_portal/refs/heads/main/tests_final.csv"
+
+
+import requests
+from io import StringIO
+
+@st.cache_resource
+def load_data():
+    try:
+        response = requests.get(
+            "https://media.githubusercontent.com/media/Omkarwalunj45/Test_cricket_portal/refs/heads/main/tests_final.csv", 
+            timeout=10
+        )
+        response.raise_for_status()
+        
+        df = pd.read_csv(StringIO(response.text), low_memory=False)
+        
+        # Preprocessing in a single chain
+        df = (df
+              .rename(columns={'innings': 'inning'})
+              .assign(is_wicket=lambda x: x['out'].astype(int))
+             )
+        
+        return df
     
-    # Load the CSV file into pandas
-    df = pd.read_csv(csv_url)
-    return df
- 
-# Use in your app
+    except requests.RequestException as e:
+        st.error(f"Error loading data: {e}")
+        return pd.DataFrame()
+
+@st.cache_data
+def load_bowling_data():
+    try:
+        bidf = pd.read_csv("Datasets/lifesaver_bowl_tests.csv", low_memory=False)
+        
+        return (bidf
+                .drop(columns=['Unnamed: 0', 'overs'], errors='ignore')
+                .assign(overs=lambda x: x['balls'].apply(
+                    lambda b: f"{mt.floor(b / 6) + round(0.1 * (b % 6), 1):.1f}".rstrip('0').rstrip('.')
+                ))
+        )
+    except Exception as e:
+        st.error(f"Error loading bowling data: {e}")
+        return pd.DataFrame()
+
+# Load data
 pdf = load_data()
 pdf=pdf.rename(columns={'innings':'inning'})
-st.write(pdf.head())
 bpdf = pdf
 pdf['is_wicket'] = pdf['out'].astype(int) 
 idf = cumulator(pdf)
