@@ -296,16 +296,14 @@ def bowlerstat(df):
 import requests
 from io import StringIO
 
-@st.cache_resource
+@st.cache_data
 def load_data():
     try:
-        response = requests.get(
+        # Direct pandas URL loading
+        df = pd.read_csv(
             "https://media.githubusercontent.com/media/Omkarwalunj45/Test_cricket_portal/refs/heads/main/tests_final.csv", 
-            timeout=10
+            low_memory=False
         )
-        response.raise_for_status()
-        
-        df = pd.read_csv(StringIO(response.text), low_memory=False)
         
         # Preprocessing in a single chain
         df = (df
@@ -315,7 +313,7 @@ def load_data():
         
         return df
     
-    except requests.RequestException as e:
+    except Exception as e:
         st.error(f"Error loading data: {e}")
         return pd.DataFrame()
 
