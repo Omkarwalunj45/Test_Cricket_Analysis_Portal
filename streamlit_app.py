@@ -273,8 +273,7 @@ def bowlerstat(df):
     # Show the results
     
     
-    [['bowler', 'Mdns']])
-
+    
     # Optional: To verify the calculation
     
     sample_over = df[df['total_runs'] == 0].head(10)
