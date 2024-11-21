@@ -271,7 +271,7 @@ def bowlerstat(df):
     bowl_rec = bowl_rec.drop('maiden_overs', axis=1)
 
     # Show the results
-    )
+    
     
     [['bowler', 'Mdns']])
 
