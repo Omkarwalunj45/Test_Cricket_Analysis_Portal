@@ -35,7 +35,7 @@ length_positions = {
     'YORKER': 1,
     'FULL_TOSS': -1
 } 
-
+@st.cache_data
 def categorize_phase(over):
               if over <= 6:
                   return 'Powerplay'
@@ -43,6 +43,7 @@ def categorize_phase(over):
                   return 'Middle'
               else:
                   return 'Death'
+@st.cache_data
 def get_current_form(bpdf, player_name):
     # Filter for matches where the player batted or bowled
     bpdf['is_wicket'] = bpdf['out'].astype(int) 
@@ -118,7 +119,7 @@ def get_current_form(bpdf, player_name):
     
     return pd.DataFrame(results)
 
-
+@st.cache_data
 def round_up_floats(df, decimal_places=2):
     # Select only float columns from the DataFrame
     float_cols = df.select_dtypes(include=['float64', 'float32'])  # Ensure to catch all float types
@@ -130,7 +131,7 @@ def round_up_floats(df, decimal_places=2):
     df[float_cols.columns] = rounded_floats
     
     return df
-
+@st.cache_data
 def cumulator(temp_df):
     # First, remove duplicates based on match_id and ball within the same match
     print(f"Before removing duplicates based on 'match_id' and 'ball': {temp_df.shape}")
@@ -184,7 +185,7 @@ def cumulator(temp_df):
     # Drop both matches_x and matches_y
     summary_df = summary_df.drop(['matches_x', 'matches_y'], axis=1)
     return summary_df
-
+@st.cache_data
 def bowlerstat(df):
     # First, remove duplicates based on match_id, ball_id, innings, batsman, and bowler
     print(f"Before removing duplicates based on 'match_id', 'ball_id', 'inning', 'batsman', 'bowler': {df.shape}")
@@ -1260,7 +1261,7 @@ elif sidebar_option == "Match by Match Analysis":
                     </div>
                 </div>
             """, unsafe_allow_html=True)
-        
+        @st.cache_data
         def get_sector_angle(zone, batting_style, offset=0):
             base_angles = {
                 1: 45,   # Third Man
@@ -1276,7 +1277,7 @@ elif sidebar_option == "Match by Match Analysis":
             if batting_style == 'LHB':
                 angle = (180 + angle) % 360
             return np.radians(angle)
-
+        @st.cache_data
         def get_line_properties(runs):
             properties = {
                 1: {'color': 'darkgreen', 'length': 0.5, 'width': 2.5,'alpha':1},    
@@ -1286,7 +1287,7 @@ elif sidebar_option == "Match by Match Analysis":
                 6: {'color': 'maroon', 'length': 1.1, 'width': 4}     
             }
             return properties.get(runs, {'color': 'white', 'length': 0.4, 'width': 1,'alpha':1})
-
+        @st.cache_data
         def draw_cricket_field_with_wagon_wheel(final_df):
             fig, ax = plt.subplots(figsize=(10, 10))
             ax.set_aspect('equal')
@@ -1401,12 +1402,13 @@ elif sidebar_option == "Match by Match Analysis":
             }
 
             # Function to apply a small random offset to length and line
+            @st.cache_data
             def apply_length_offset(y_value, offset_range=(-0.95, 0.95), boundary=(-2, 10)):
                 offset = np.random.uniform(offset_range[0], offset_range[1])
                 if boundary[0] <= y_value + offset <= boundary[1]:
                     return y_value + offset
                 return y_value
-
+            @st.cache_data
             def apply_line_offset(x_value, offset_range=(-0.04, 0.04), boundary=(-0.5, 0.5)):
                 offset = np.random.uniform(offset_range[0], offset_range[1])
                 if boundary[0] <= x_value + offset <= boundary[1]:
@@ -1600,6 +1602,7 @@ elif sidebar_option == "Match by Match Analysis":
         length_labels = ['Short', 'Back of Length', 'Good Length', 'Full', 'Yorker']
 
         # Function to create heatmap figure for a 5x5 grid
+        @st.cache_data
         def create_heatmap(grid, title, annotations):
             fig = go.Figure(
                 data=go.Heatmap(
@@ -1771,7 +1774,7 @@ else:
         st.table(result_df.style.set_table_attributes("style='font-weight: bold;'"))
         
 
-
+        @st.cache_data
         def get_sector_angle(zone, batting_style):
             # Set base angle for RHB and mirror for LHB
             base_angles = {
@@ -1791,7 +1794,7 @@ else:
                 angle = (180 + angle) % 360
             
             return np.radians(angle)
-
+        @st.cache_data
         def draw_cricket_field_with_run_totals(final_df):
             fig, ax = plt.subplots(figsize=(10, 10))
             ax.set_aspect('equal')
@@ -1898,6 +1901,7 @@ else:
             length_labels = ['Short', 'Back of Length', 'Good Length', 'Full', 'Yorker']
             
             # Function to create heatmap figure for a 5x5 grid
+            @st.cache_data
             def create_heatmap(grid, title, annotations):
                 fig = go.Figure(
                     data=go.Heatmap(
@@ -1933,10 +1937,9 @@ else:
         
         
         
-        import streamlit as st
+      
         import plotly.graph_objects as go
-        import pandas as pd
-        import numpy as np
+      
         final_df = pdf[pdf['batsman']==player_name]
 
         # Define pitch zones with boundaries
@@ -1968,12 +1971,13 @@ else:
         } 
     
         # Function to apply a small random offset to length while keeping line accurate
+        @st.cache_data
         def apply_length_offset(y_value, offset_range=(-0.95, 0.95), boundary=(-2, 10)):
             offset = np.random.uniform(offset_range[0], offset_range[1])
             if boundary[0] <= y_value + offset <= boundary[1]:
                 return y_value + offset
             return y_value
-        
+        @st.cache_data
         def apply_line_offset(x_value, offset_range=(-0.05, 0.05), boundary=(-0.5, 0.5)):
             offset = np.random.uniform(offset_range[0], offset_range[1])
             if boundary[0] <= x_value + offset <= boundary[1]:
@@ -1989,6 +1993,7 @@ else:
         spin_df = final_df[final_df['bowl_kind'] == 'spin bowler']
         
         # Function to create a 3D pitch map based on handedness
+        @st.cache_data
         def create_pitch_map(data, handedness):
             fig = go.Figure()
         
@@ -2214,12 +2219,13 @@ else:
             } 
             
             # Function to apply a small random offset to length while keeping line accurate
+            @st.cache_data
             def apply_length_offset(y_value, offset_range=(-0.95, 0.95), boundary=(-2, 10)):
                 offset = np.random.uniform(offset_range[0], offset_range[1])
                 if boundary[0] <= y_value + offset <= boundary[1]:
                     return y_value + offset
                 return y_value
-            
+            @st.cache_data
             def apply_line_offset(x_value, offset_range=(-0.05, 0.05), boundary=(-0.5, 0.5)):
                 offset = np.random.uniform(offset_range[0], offset_range[1])
                 if boundary[0] <= x_value + offset <= boundary[1]:
@@ -2232,6 +2238,7 @@ else:
             rhb_data = final_df[final_df['batting_style'] == 'RHB']
             
             # Function to create a 3D pitch map based on handedness
+            @st.cache_data
             def create_pitch_map(data, handedness):
                 fig = go.Figure()
             
@@ -2418,6 +2425,7 @@ else:
             length_labels = ['Short', 'Back of Length', 'Good Length', 'Full', 'Yorker']
             
             # Function to create heatmap figure for a 5x5 grid
+            @st.cache_data
             def create_heatmap(grid, title, annotations):
                 fig = go.Figure(
                     data=go.Heatmap(
