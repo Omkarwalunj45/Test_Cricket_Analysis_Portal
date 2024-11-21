@@ -331,13 +331,10 @@ def load_bowling_data():
 
 # Load data
 pdf = load_data()
-pdf=pdf.rename(columns={'innings':'inning'})
+
 bpdf = pdf
-pdf['is_wicket'] = pdf['out'].astype(int) 
 idf = cumulator(pdf)
-bidf = load_csv("Datasets/lifesaver_bowl_tests.csv")
-bidf=bidf.drop(columns=['Unnamed: 0','overs'])
-bidf['overs'] = bidf['balls'].apply(lambda x: f"{mt.floor(x / 6) + round(0.1 * (x % 6), 1):.1f}".rstrip('0').rstrip('.'))
+bidf = load_bowling_data()
 
 # Define a mapping dictionary to consolidate bowling styles
 bowling_style_mapping = {
