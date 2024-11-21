@@ -465,7 +465,7 @@ if sidebar_option == "Player Profile":
                 for season in unique_seasons:
                     
                     temp_df = tdf[(tdf['season'] == season)]
-                    )
+                    
                     temp_df = cumulator(temp_df)
                     if i==0:
                         result_df = temp_df  # Initialize with the first result_df
