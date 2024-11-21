@@ -293,10 +293,6 @@ def bowlerstat(df):
 
     return bowl_rec
 
-
-import requests
-from io import StringIO
-
 @st.cache_data
 def load_data():
     try:
