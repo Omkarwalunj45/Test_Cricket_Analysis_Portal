@@ -425,7 +425,7 @@ if sidebar_option == "Player Profile":
                 
                     # Concatenate results into result_df
                     result_df.append(temp_df)
-result_df = pd.concat(result_df, ignore_index=True)
+                result_df = pd.concat(result_df, ignore_index=True)
                 
                 # Display the final result_df
                 # result_df.rename(columns={'matches_x':'matches'})
