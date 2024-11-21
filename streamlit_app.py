@@ -660,7 +660,7 @@ if sidebar_option == "Player Profile":
                             
                                 # Concatenate results into result_df
                                 result_df.append(temp_df)
-result_df = pd.concat(result_df, ignore_index=True)
+                        result_df = pd.concat(result_df, ignore_index=True)
                     # Display the final result_df
                         result_df = result_df.drop(columns=['bowler'])
                         result_df.columns = [col.upper().replace('_', ' ') for col in result_df.columns]
