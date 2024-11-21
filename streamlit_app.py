@@ -1663,7 +1663,7 @@ else:
             
             # Concatenate results into result_df
             result_df.append(temp_df)
-result_df = pd.concat(result_df, ignore_index=True)
+        result_df = pd.concat(result_df, ignore_index=True)
         
         # Display the final result_df
         result_df = result_df.drop(columns=['batsman', 'debut_year', 'final_year','hundreds','fifties','thirties','highest_score','matches'])
@@ -1722,7 +1722,7 @@ result_df = pd.concat(result_df, ignore_index=True)
             
             # Concatenate results into result_df
             result_df.append(temp_df)
-result_df = pd.concat(result_df, ignore_index=True)
+        result_df = pd.concat(result_df, ignore_index=True)
         
         # Display the final result_df
         result_df = result_df.drop(columns=['batsman', 'debut_year', 'final_year','hundreds','fifties','thirties','highest_score','matches'])
