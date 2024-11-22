@@ -309,7 +309,6 @@ def load_data():
 def load_bowling_data():
     try:
         bidf = pd.read_csv("Datasets/lifesaver_bowl_tests.csv", low_memory=False)
-        
         return (bidf
                 .drop(columns=['Unnamed: 0', 'overs'], errors='ignore')
                 .assign(overs=lambda x: x['balls'].apply(
