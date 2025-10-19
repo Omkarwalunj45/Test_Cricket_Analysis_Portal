@@ -1619,6 +1619,20 @@ elif sidebar_option == "Match by Match Analysis":
 
 
 
+
+# Custom CSS to reduce spacing around plots and headings
+st.markdown("""
+    <style>
+        .stPlotlyChart, .stPyplot {
+            margin-top: -10px !important;
+            padding-top: 0px !important;
+        }
+        .stMarkdown p {
+            margin-bottom: -25px !important;
+        }
+    </style>
+""", unsafe_allow_html=True)
+
 else:
     st.header("Strength and Weakness Analysis")
     player_name = st.selectbox("Search for a player", idf['batsman'].unique())
@@ -1632,6 +1646,11 @@ else:
         result_df = pd.DataFrame()
     
         final_df = pdf[pdf['batsman'] == player_name]
+        
+        # Split data for pace and spin
+        pace_df = final_df[final_df['bowl_kind'] == 'pace bowler']
+        spin_df = final_df[final_df['bowl_kind'] == 'spin bowler']
+        
         result_df = pd.DataFrame()
         i = 0
         
@@ -1825,7 +1844,7 @@ else:
         col1, col2 = st.columns(2)
 
         with col1:
-            st.write("### Wagon Chart")
+            st.markdown("<p style='margin-bottom: -25px;'><b>Wagon Chart</b></p>", unsafe_allow_html=True)
             # Display the wicket count grid
             fig = draw_cricket_field_with_run_totals(final_df)
             st.pyplot(fig, use_container_width=True)
@@ -1905,7 +1924,7 @@ else:
             
             
 
-            st.write("### Runs Scored")
+            st.markdown("<p style='margin-bottom: -25px;'><b>Runs Scored</b></p>", unsafe_allow_html=True)
             # Display the runs count grid
             st.plotly_chart(create_heatmap(run_count_grid, "Runs", run_count_grid), use_container_width=True)
          
@@ -2018,8 +2037,8 @@ else:
             # Set mirroring factor based on handedness
             mirror_factor = -1 if handedness == 'LHB' else 1 if handedness == 'RHB' else 0
         
-            # Filter data to only include wicket balls
-            wicket_data = data[data['bowler_wkt'] == 1]
+            # Filter data to only include wicket balls (for batting, use 'is_wkt')
+            wicket_data = data[data['is_wkt'] == 1]
         
             # Plot wicket balls
             for index, row in wicket_data.iterrows():
@@ -2060,20 +2079,21 @@ else:
 
 
         bat_hand = final_df['batting_style'].iloc[0]
-        # Display each plot in the respective column
+        # Display pitch maps with reduced gap
+        col1, col2 = st.columns(2)
         with col1:
-            st.write("### Against Pace")
+            st.markdown("<p style='margin-bottom: -25px;'><b>Wickets vs Pace</b></p>", unsafe_allow_html=True)
             if pace_df.empty:
                 st.write("No data for Pace")
             else:
-                st.plotly_chart(create_pitch_map(pace_df, bat_hand ))
+                st.plotly_chart(create_pitch_map(pace_df, bat_hand), use_container_width=True)
         
         with col2:
-            st.write("### Against Spin")
+            st.markdown("<p style='margin-bottom: -25px;'><b>Wickets vs Spin</b></p>", unsafe_allow_html=True)
             if spin_df.empty:
-                st.write("No data for Right-Handed Batsmen")
+                st.write("No data for Spin")
             else:
-                st.plotly_chart(create_pitch_map(spin_df,bat_hand))
+                st.plotly_chart(create_pitch_map(spin_df, bat_hand), use_container_width=True)
                 
                 
     else:
@@ -2290,21 +2310,22 @@ else:
                 )
                 return fig
 
+            col1, col2 = st.columns(2)
             
             # Display each plot in the respective column
             with col1:
-                st.write("### Against Left-Handed Batsmen")
+                st.markdown("<p style='margin-bottom: -25px;'><b>Wickets vs LHB</b></p>", unsafe_allow_html=True)
                 if lhb_data.empty:
                     st.write("No data for Left-Handed Batsmen")
                 else:
-                    st.plotly_chart(create_pitch_map(lhb_data, 'LHB'), key="LHB")
+                    st.plotly_chart(create_pitch_map(lhb_data, 'LHB'), key="LHB", use_container_width=True)
             
             with col2:
-                st.write("### Against Right-Handed Batsmen")
+                st.markdown("<p style='margin-bottom: -25px;'><b>Wickets vs RHB</b></p>", unsafe_allow_html=True)
                 if rhb_data.empty:
                     st.write("No data for Right-Handed Batsmen")
                 else:
-                    st.plotly_chart(create_pitch_map(rhb_data, 'RHB'), key="RHB")
+                    st.plotly_chart(create_pitch_map(rhb_data, 'RHB'), key="RHB", use_container_width=True)
 
             import numpy as np
             import plotly.graph_objects as go
@@ -2392,13 +2413,13 @@ else:
             
             # First Column - Wicket Heatmap
             with col1:
-                st.write("### Wicket Distribution")
+                st.markdown("<p style='margin-bottom: -25px;'><b>Wicket Distribution</b></p>", unsafe_allow_html=True)
                 wicket_fig = create_heatmap(wicket_count_grid, "Wickets", wicket_count_grid)
                 st.plotly_chart(wicket_fig, use_container_width=True)
             
             # Second Column - Run Distribution for Bowler
             with col2:
-                st.write("### Runs Given")
+                st.markdown("<p style='margin-bottom: -25px;'><b>Runs Given</b></p>", unsafe_allow_html=True)
                 run_fig_bowler = create_heatmap(run_count_grid_bowler, "Runs", run_count_grid_bowler)
                 st.plotly_chart(run_fig_bowler, use_container_width=True)
         else:
